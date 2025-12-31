@@ -1,0 +1,159 @@
+[
+  {
+    "label": "Overview",
+    "items": [
+      { "label": "Welcome", "slug": "docs" },
+      { "label": "Quick Start", "slug": "docs/QUICK_START_CONTRIBUTORS" },
+      { "label": "Installation", "slug": "docs/DEVELOPER_SETUP" },
+      { "label": "Troubleshooting", "slug": "docs/TROUBLESHOOTING" }
+    ]
+  },
+  {
+    "label": "AI Providers",
+    "items": [
+      { "label": "Overview", "slug": "docs/providers" },
+      { "label": "OpenRouter", "slug": "docs/providers/openrouter" },
+      { "label": "OpenAI", "slug": "docs/providers/openai" },
+      { "label": "Qwen / DashScope", "slug": "docs/providers/qwen" },
+      { "label": "Google Gemini", "slug": "docs/providers/google" },
+      { "label": "DeepSeek", "slug": "docs/providers/deepseek" },
+      { "label": "Local Models", "slug": "docs/providers/local" }
+    ]
+  },
+  {
+    "label": "CLI",
+    "items": [
+      { "label": "Introduction", "slug": "docs/cli" },
+      { "label": "Authentication", "slug": "docs/cli/authentication" },
+      { "label": "Commands", "slug": "docs/cli/commands" },
+      { "label": "Configuration", "slug": "docs/cli/configuration" },
+      { "label": "Checkpointing", "slug": "docs/checkpointing" },
+      { "label": "Extensions", "slug": "docs/extension" },
+      { "label": "Headless Mode", "slug": "docs/headless" },
+      { "label": "IDE Integration", "slug": "docs/ide-integration" },
+      {
+        "label": "IDE Companion Spec",
+        "slug": "docs/ide-companion-spec"
+      },
+      { "label": "Telemetry", "slug": "docs/telemetry" },
+      { "label": "Themes", "slug": "docs/cli/themes" },
+      { "label": "Token Caching", "slug": "docs/cli/token-caching" },
+      { "label": "Trusted Folders", "slug": "docs/trusted-folders" },
+      { "label": "Tutorials", "slug": "docs/cli/tutorials" }
+    ]
+  },
+  {
+    "label": "Core",
+    "items": [
+      { "label": "Introduction", "slug": "docs/core" },
+      { "label": "Tools API", "slug": "docs/core/tools-api" },
+      { "label": "Memory Import Processor", "slug": "docs/core/memport" }
+    ]
+  },
+  {
+    "label": "Tools",
+    "items": [
+      { "label": "Overview", "slug": "docs/tools" },
+      { "label": "File System", "slug": "docs/tools/file-system" },
+      { "label": "Multi-File Read", "slug": "docs/tools/multi-file" },
+      { "label": "Shell", "slug": "docs/tools/shell" },
+      { "label": "Web Search", "slug": "docs/tools/web-search" },
+      { "label": "Memory", "slug": "docs/tools/memory" },
+      { "label": "MCP Servers", "slug": "docs/tools/mcp-server" },
+      { "label": "MCP Tool Catalog", "slug": "docs/tools/MCP_TOOL_CATALOG" },
+      { "label": "Sandboxing", "slug": "docs/sandbox" },
+      {
+        "label": "Binary Patching",
+        "slug": "docs/tools/binary-patching-guide"
+      },
+      {
+        "label": "Malware Evasion Detection",
+        "slug": "docs/tools/modern-malware-evasion-detection"
+      },
+      {
+        "label": "Packer Detection",
+        "slug": "docs/tools/packer-detection-enhancement"
+      }
+    ]
+  },
+  {
+    "label": "CTF & Reverse Engineering",
+    "items": [
+      { "label": "CTF Quick Wins", "slug": "docs/ctf-quick-wins" },
+      { "label": "CTF Crypto Guide", "slug": "docs/ctf-crypto-guide" },
+      {
+        "label": "CTF Reverse Engineering",
+        "slug": "docs/ctf-reverse-engineering-guide"
+      },
+      {
+        "label": "LLM Cracking Workflow",
+        "slug": "docs/llm-friendly-cracking-workflow"
+      },
+      {
+        "label": "LLM Cracking Enhancement",
+        "slug": "docs/tools/ctf-cracking-enhancement"
+      }
+    ]
+  },
+  {
+    "label": "Security Scanning",
+    "items": [
+      {
+        "label": "Nuclei Integration",
+        "slug": "docs/nuclei-integration-guide"
+      },
+      { "label": "FFUF Integration", "slug": "docs/ffuf-integration-guide" }
+    ]
+  },
+  {
+    "label": "Performance & Optimization",
+    "items": [
+      { "label": "Memory Management", "slug": "docs/memory-management" },
+      {
+        "label": "Memory Quick Reference",
+        "slug": "docs/memory-quick-reference"
+      },
+      {
+        "label": "Permanent Memory Config",
+        "slug": "docs/permanent-memory-configuration"
+      },
+      {
+        "label": "Parallel Execution Quick Start",
+        "slug": "docs/parallel-execution-quick-start"
+      },
+      {
+        "label": "Parallel Tool Execution",
+        "slug": "docs/parallel-tool-execution"
+      },
+      {
+        "label": "AI-Driven Parallel Execution",
+        "slug": "docs/ai-driven-parallel-execution"
+      }
+    ]
+  },
+  {
+    "label": "CLI Enhancements",
+    "items": [
+      { "label": "Shell Completions", "slug": "docs/shell-completions" },
+      { "label": "Typo Detection", "slug": "docs/typo-detection" },
+      {
+        "label": "Completion & Typo Features",
+        "slug": "docs/cli/completion-and-typo-features"
+      }
+    ]
+  },
+  {
+    "label": "Development",
+    "items": [
+      { "label": "NPM", "slug": "docs/npm" },
+      { "label": "Releases", "slug": "docs/releases" }
+    ]
+  },
+  {
+    "label": "Support",
+    "items": [
+      { "label": "Troubleshooting", "slug": "docs/troubleshooting" },
+      { "label": "Terms of Service", "slug": "docs/tos-privacy" }
+    ]
+  }
+]

@@ -1,0 +1,81 @@
+{
+  "$version": 2,
+  "general": {
+    "language": "auto",
+    "vimMode": false,
+    "disableAutoUpdate": false,
+    "checkpointing": {
+      "enabled": true,
+      "autoSave": true,
+      "saveInterval": 300000
+    }
+  },
+  "ui": {
+    "theme": "dark",
+    "showMemoryUsage": true,
+    "hideWindowTitle": false,
+    "hideCWD": false,
+    "hideTips": false,
+    "accessibility": {
+      "disableLoadingPhrases": false
+    }
+  },
+  "ide": {
+    "enabled": false,
+    "port": 8765
+  },
+  "privacy": {
+    "enablePrivacyMode": false
+  },
+  "telemetry": {
+    "enabled": false
+  },
+  "security": {
+    "auth": {
+      "selectedType": "use-openai"
+    },
+    "folderTrust": {
+      "enabled": true,
+      "autoTrustWorkspaces": false,
+      "trustedFolders": []
+    }
+  },
+  "model": {
+    "provider": "openai",
+    "chatCompression": "auto"
+  },
+  "context": {
+    "fileName": "CONTEXT.md",
+    "importFormat": "tree",
+    "includeDirectories": [],
+    "loadMemoryFromIncludeDirectories": false,
+    "discoveryMaxDirs": 200,
+    "discoveryMaxFiles": 1000,
+    "fileFiltering": {
+      "respectGitIgnore": true,
+      "respectQwenIgnore": true,
+      "enableRecursiveFileSearch": true,
+      "allowSymlinks": true
+    }
+  },
+  "tools": {
+    "autoAccept": false,
+    "sandbox": false,
+    "useRipgrep": true,
+    "useBuiltinRipgrep": true,
+    "shell": {
+      "enableInteractiveShell": false
+    }
+  },
+  "mcp": {
+    "allowed": []
+  },
+  "advanced": {
+    "autoConfigureMemory": true,
+    "maxOutputLines": 200,
+    "enableToolOutputTruncation": true
+  },
+  "experimental": {
+    "zedIntegration": false
+  }
+}

@@ -1,0 +1,21 @@
+diff --git a/node_modules/normalize-package-data/lib/fixer.js b/node_modules/normalize-package-data/lib/fixer.js
+index 27682e9..1014e93 100644
+--- a/node_modules/normalize-package-data/lib/fixer.js
++++ b/node_modules/normalize-package-data/lib/fixer.js
+@@ -5,6 +5,16 @@ var isBuiltinModule = require("resolve").isCore
+ var depTypes = ["dependencies","devDependencies","optionalDependencies"]
+ var extractDescription = require("./extract_description")
+ var url = require("url")
++var originalParse = url.parse
++url.parse = function(str) {
++  try {
++    const parsed = new url.URL(str)
++    return { protocol: parsed.protocol }
++  } catch {
++    // If URL parsing fails, treat as relative (no protocol)
++    return { protocol: null }
++  }
++}
+ var typos = require("./typos.json")
+ 
+ var fixer = module.exports = {

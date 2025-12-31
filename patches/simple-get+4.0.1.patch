@@ -1,0 +1,53 @@
+diff --git a/node_modules/simple-get/index.js b/node_modules/simple-get/index.js
+index 80e52e8..7052196 100644
+--- a/node_modules/simple-get/index.js
++++ b/node_modules/simple-get/index.js
+@@ -9,6 +9,30 @@ const once = require('once')
+ const querystring = require('querystring')
+ const url = require('url')
+ 
++function parseUrl(str) {
++  try {
++    const url = new URL(str)
++    return {
++      hostname: url.hostname,
++      port: url.port,
++      protocol: url.protocol,
++      auth: url.username || url.password ? url.username + ':' + url.password : null,
++      path: url.pathname + url.search
++    }
++  } catch (err) {
++    // Relative URL, parse with dummy base
++    const base = 'http://example.com'
++    const url = new URL(str, base)
++    return {
++      hostname: null,
++      port: null,
++      protocol: null,
++      auth: null,
++      path: url.pathname + url.search
++    }
++  }
++}
++
+ const isStream = o => o !== null && typeof o === 'object' && typeof o.pipe === 'function'
+ 
+ function simpleGet (opts, cb) {
+@@ -16,7 +40,7 @@ function simpleGet (opts, cb) {
+   cb = once(cb)
+ 
+   if (opts.url) {
+-    const { hostname, port, protocol, auth, path } = url.parse(opts.url) // eslint-disable-line node/no-deprecated-api
++    const { hostname, port, protocol, auth, path } = parseUrl(opts.url) // eslint-disable-line node/no-deprecated-api
+     delete opts.url
+     if (!hostname && !port && !protocol && !auth) opts.path = path // Relative redirect
+     else Object.assign(opts, { hostname, port, protocol, auth, path }) // Absolute redirect
+@@ -52,7 +76,7 @@ function simpleGet (opts, cb) {
+       delete opts.headers.host // Discard `host` header on redirect (see #32)
+       res.resume() // Discard response
+ 
+-      const redirectHost = url.parse(opts.url).hostname // eslint-disable-line node/no-deprecated-api
++      const redirectHost = parseUrl(opts.url).hostname // eslint-disable-line node/no-deprecated-api
+       // If redirected host is different than original host, drop headers to prevent cookie leak (#73)
+       if (redirectHost !== null && redirectHost !== originalHost) {
+         delete opts.headers.cookie

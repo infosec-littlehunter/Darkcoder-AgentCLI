@@ -1,0 +1,14 @@
+{
+  "providers": {
+    "title": "AI Providers",
+    "items": {
+      "index": "Overview",
+      "openrouter": "OpenRouter",
+      "openai": "OpenAI",
+      "qwen": "Qwen / DashScope",
+      "google": "Google Gemini",
+      "deepseek": "DeepSeek",
+      "local": "Local Models (Ollama)"
+    }
+  }
+}

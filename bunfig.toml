@@ -1,0 +1,64 @@
+# Bun configuration for DarkCoder CLI
+# https://bun.sh/docs/runtime/bunfig
+
+[install]
+# Use exact versions to match Node's package-lock.json behavior
+exact = true
+
+# Cache directory
+cache = "node_modules/.cache/bun"
+
+# Production-only dependencies for faster installs
+production = false
+
+[run]
+# Always use --smol for memory efficiency
+smol = true
+
+# Enable hot module reloading in development
+hot = false
+
+[test]
+# Use Bun's test runner (compatible with Vitest)
+preload = []
+coverage = false
+bail = false
+
+[build]
+# Target CommonJS for Node compatibility
+target = "node"
+
+# Minify for production
+minify = false
+
+# Source maps for debugging
+sourcemap = "external"
+
+# Splitting for better caching
+splitting = false
+
+[loader]
+# Handle TypeScript natively
+".ts" = "tsx"
+".tsx" = "tsx"
+".js" = "jsx"
+".jsx" = "jsx"
+
+# JSON modules
+".json" = "json"
+
+# Text files
+".txt" = "text"
+".md" = "text"
+
+[define]
+# Environment variable definitions
+# NODE_ENV defaults are handled by scripts
+
+[macro]
+# No macros currently needed
+
+# Performance tuning
+[experimental]
+# Enable faster module resolution
+fast-module-resolution = true
