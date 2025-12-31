@@ -224,7 +224,6 @@ export class ToolCallEmitter extends BaseEmitter {
       [Kind.Think]: 'think',
       [Kind.Fetch]: 'fetch',
       [Kind.Other]: 'other',
-      [Kind.BinaryAnalysis]: 'other',
     };
     return kindMap[kind] ?? 'other';
   }

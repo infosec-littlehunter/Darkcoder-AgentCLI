@@ -40,11 +40,11 @@
 
 ## 🎯 Why DarkCoder?
 
-- **🔒 Security-First Design**: Built from the ground up for cybersecurity operations with specialized tools and workflows
+- **🔒 Security-First Design**: Built from the ground up for cybersecurity operations with specialized workflows
 - **🌐 Multi-Provider Support**: Works with OpenAI, Qwen, DashScope, and other AI providers - no vendor lock-in
-- **🛠️ Integrated Security Tools**: Built-in Shodan, Censys, URLScan, VirusTotal, bug bounty platforms, and OSINT tools
+- **🛠️ MCP-First Security Tooling**: Transitioned deep operations (Reverse Engineering, Vuln Hunting) to external MCP servers for isolation and flexibility
+- **📡 Built-in Threat Intelligence**: Native integration for VirusTotal, Censys, URLScan, VulnDB, and malware sandboxes
 - **🎯 Predictive Security Operations**: Advanced scenario prediction and autonomous execution capabilities
-- **🔧 Extensible Architecture**: Custom tools via MCP (Model Context Protocol) and plugin system
 - **💻 Terminal-First Workflow**: Designed for security professionals who live in the terminal
 
 ---
@@ -115,10 +115,11 @@
 
 ### 🔐 **Security Intelligence**
 
-- **CVE Lookup**: Real-time vulnerability information with CVSS scoring
-- **Exploit Search**: Public exploit/PoC discovery across multiple repositories
-- **Threat Intel**: IOC analysis, campaign tracking, actor profiling
-- **VirusTotal**: File/URL/domain analysis, malware intelligence
+- **CVE Lookup (VulnDB)**: Real-time vulnerability information with CVSS scoring and Exploit-DB integration
+- **Exploit Search**: Public exploit/PoC discovery via `vuln_db` and security intelligence tools
+- **Threat Intel**: IOC analysis, campaign tracking, actor profiling via VT and Shodan
+- **VirusTotal**: Deep file/URL/domain analysis and malware intelligence
+- **MCP-First Reverse Engineering**: Delegate deep binary analysis, decompilation (Ghidra/r2), and firmware extraction to isolated MCP environments
 - **AI/LLM Security**: Advanced prompt injection detection, jailbreak prevention, multi-modal attack defense (2025)
   - Modern prompt injection patterns (60-85% success rate mitigation)
   - Sophisticated jailbreaking techniques and countermeasures
@@ -155,16 +156,15 @@
 
 ### 🦠 **Malware Analysis**
 
-- **Reverse Engineering Tool**: Comprehensive binary analysis toolkit (20,000+ lines)
-  - **NEW**: 6 live intelligence operations integrated:
+- **MCP-First Analysis**: Large-scale binary analysis and decompilation are handled via MCP servers (Radare2, Rizin, Ghidra)
+- **Built-in Threat Intel Integration**: 6 live intelligence operations integrated into the security workflow:
     - `check_cves`: Query live CVE databases for vulnerabilities
     - `check_exploits`: Search Exploit-DB for proof-of-concepts
     - `threat_intel`: VirusTotal + Shodan threat intelligence
     - `check_yara_rules`: YARAify malware signature matching
     - `vendor_advisories`: Vendor security bulletins
     - `recent_attacks`: CISA KEV catalog of exploited vulnerabilities
-  - Manual analysis emphasis with automated intelligence support
-  - Memory-safe processing with absolute limits
+- **Memory-Safe Processing**: Absolute limits on intelligence data ingestion to prevent heap overflow
 - **Cuckoo Sandbox**: Automated dynamic malware analysis (self-hosted)
   - File and URL submission
   - Behavioral analysis (process, network, registry, file system)
@@ -1079,47 +1079,21 @@ darkcoder completion --install
 }
 ```
 
-#### Bug Bounty Program Search
+#### External Security Tools (MCP)
 
-```json
-{
-  "tool": "bug_bounty",
-  "operation": "search",
-  "query": "crypto",
-  "platform": "immunefi",
-  "limit": 10
-}
-```
+For deep operations, DarkCoder delegates to external MCP servers:
 
-### Reverse Engineering
+- **Reverse Engineering**: Use `radare2`, `rizin`, or `Ghidra` MCP servers for deep binary analysis.
+- **Vulnerability Hunting**: Specialized MCP servers for automated vulnerability discovery.
+- **Custom Recon**: Tailored MCP tools for niche asset discovery.
 
-DarkCoder includes helper workflows for reverse engineering using radare2/rizin, Ghidra headless, binwalk, strings, objdump, and rabin2. It also reduces false positives with explicit verification prompts.
 
-#### Detect Available Tools
+#### MCP-First Workflow
 
-Get a report of installed tools and suggested improvements. This helps DarkCoder tailor analysis to your environment.
+DarkCoder delegates complex binary analysis and decompilation to isolated MCP environments. This ensures your local machine remains secure while the agent performs deep analysis using tools like `radare2`, `rizin`, or `Ghidra`.
 
-```json
-{
-  "tool": "reverse_engineering",
-  "operation": "detect_tools",
-  "targetPath": "/path/to/binary"
-}
-```
+To use these, configure the corresponding MCP servers in `~/.qwen/settings.json`.
 
-The output includes:
-
-- Detected tools and versions (radare2/rizin, Ghidra, binwalk, strings, objdump, rabin2)
-- Capabilities (which workflows are enabled)
-- Recommendations (e.g., install `rabin2` for richer ELF introspection)
-
-#### Relocation Handling (radare2/rizin)
-
-DarkCoder automatically applies `-e bin.relocs.apply=true` when invoking radare2/rizin, preventing warnings like:
-
-> WARN: Relocs has not been applied. Please use `-e bin.relocs.apply=true`
-
-This ensures more accurate disassembly and analysis. If you run radare2/rizin manually, include the same flag for parity with DarkCoder’s results.
 
 #### CVE Lookup
 
@@ -1393,14 +1367,12 @@ All CVE intelligence operations include automatic protection:
 
 | Tool              | Description                     | Use Case                                 |
 | ----------------- | ------------------------------- | ---------------------------------------- |
-| `shodan`          | Internet device search          | Host discovery, port scanning            |
-| `censys`          | Host & certificate search       | SSL cert enumeration, asset discovery    |
-| `nuclei`          | Vulnerability scanner           | CVE scanning, misconfiguration detection |
-| `urlscan`         | Website scanning                | URL analysis, screenshot capture         |
-| `wayback_machine` | Historical website data         | Subdomain discovery, endpoint finding    |
-| `security_intel`  | CVE & exploit database          | Vulnerability research, PoC hunting      |
-| `bug_bounty`      | Bug bounty platform integration | Program discovery, scope analysis        |
-| `api_key_manager` | API key management              | Configuration management                 |
+| `shodan` | Internet device search | Host discovery, port scanning |
+| `censys` | Host & certificate search | SSL cert enumeration, asset discovery |
+| `urlscan` | Website scanning | URL analysis, screenshot capture |
+| `wayback_machine` | Historical website data | Subdomain discovery, endpoint finding |
+| `vuln_db` | CVE & exploit database | Vulnerability research, PoC hunting |
+| `api_key_manager` | API key management | Configuration management |
 
 ### Malware Analysis Tools
 

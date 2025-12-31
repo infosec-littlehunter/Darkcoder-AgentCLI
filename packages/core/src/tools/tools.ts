@@ -606,7 +606,6 @@ export enum Kind {
   Think = 'think',
   Fetch = 'fetch',
   Other = 'other',
-  BinaryAnalysis = 'binary_analysis',
 }
 
 // Function kinds that have side effects

@@ -30,21 +30,12 @@ export const ToolNames = {
   SECURITY_INTEL: 'security_intel',
   CIS_BENCHMARK: 'cis_benchmark',
   API_KEY_MANAGER: 'api_key_manager',
-  BUG_BOUNTY: 'bug_bounty',
   VULN_DB: 'vuln_db',
-  ASSET_DISCOVERY: 'asset_discovery',
-  WEB_TECH: 'web_tech',
   CUCKOO_SANDBOX: 'cuckoo_sandbox',
   VIRUSTOTAL: 'virustotal',
   YARAIFY: 'yaraify',
   HYBRID_ANALYSIS: 'hybrid_analysis',
-  WEB_RECON_METHODOLOGY: 'web_recon_methodology',
   TOOL_VALIDATION: 'tool_validation',
-  // Binary Analysis & Exploitation Tools
-  BINARY_ANALYSIS: 'binary_analysis',
-  RADARE2: 'radare2',
-  GDB_DEBUGGER: 'gdb_debugger',
-  REVERSE_ENGINEERING: 'reverse_engineering',
 } as const;
 
 /**
@@ -73,21 +64,12 @@ export const ToolDisplayNames = {
   SECURITY_INTEL: 'SecurityIntel',
   CIS_BENCHMARK: 'CISBenchmark',
   API_KEY_MANAGER: 'ApiKeyManager',
-  BUG_BOUNTY: 'BugBounty',
   VULN_DB: 'VulnDB',
-  ASSET_DISCOVERY: 'AssetDiscovery',
-  WEB_TECH: 'WebTech',
   CUCKOO_SANDBOX: 'CuckooSandbox',
   VIRUSTOTAL: 'VirusTotal',
   YARAIFY: 'YARAify',
   HYBRID_ANALYSIS: 'HybridAnalysis',
-  WEB_RECON_METHODOLOGY: 'WebReconMethodology',
   TOOL_VALIDATION: 'ToolValidation',
-  // Binary Analysis & Exploitation Tools
-  BINARY_ANALYSIS: 'BinaryAnalysis',
-  RADARE2: 'Radare2',
-  GDB_DEBUGGER: 'GDB',
-  REVERSE_ENGINEERING: 'ReverseEngineering',
 } as const;
 
 // Migration from old tool names to new tool names

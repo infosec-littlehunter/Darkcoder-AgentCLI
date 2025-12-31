@@ -469,7 +469,7 @@ export class ApiKeyManager {
   private initialized: boolean = false;
 
   private constructor() {
-    this.configPath = path.join(os.homedir(), '.darkcoder', 'api-keys.json');
+    this.configPath = ''; // Initialized in initialize()
   }
 
   static getInstance(): ApiKeyManager {
@@ -484,6 +484,17 @@ export class ApiKeyManager {
    */
   async initialize(): Promise<void> {
     if (this.initialized) return;
+
+    // Use default path if not already set (e.g. for testing)
+    if (!this.configPath) {
+      const homedir = os.homedir();
+      if (!homedir) {
+        // Fallback for environments where homedir is not available (e.g. some CI/CD or mocked tests)
+        this.configPath = path.join('.darkcoder', 'api-keys.json');
+      } else {
+        this.configPath = path.join(homedir, '.darkcoder', 'api-keys.json');
+      }
+    }
 
     try {
       const configDir = path.dirname(this.configPath);

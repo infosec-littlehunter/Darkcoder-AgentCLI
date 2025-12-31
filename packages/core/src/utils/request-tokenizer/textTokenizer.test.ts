@@ -77,7 +77,7 @@ describe('TextTokenizer', () => {
       const result = await tokenizer.calculateTokens(testText);
 
       expect(mockGetEncoding).toHaveBeenCalledWith('cl100k_base');
-      expect(mockEncode).toHaveBeenCalledWith(testText);
+      expect(mockEncode).toHaveBeenCalledWith(testText, 'all');
       expect(result).toBe(5);
     });
 
@@ -177,7 +177,7 @@ describe('TextTokenizer', () => {
 
       expect(result).toEqual([0, 3, 0]);
       expect(mockEncode).toHaveBeenCalledTimes(1);
-      expect(mockEncode).toHaveBeenCalledWith('hello');
+      expect(mockEncode).toHaveBeenCalledWith('hello', 'all');
     });
 
     it('should use fallback calculation when tiktoken fails to load', async () => {
@@ -317,7 +317,7 @@ describe('TextTokenizer', () => {
 
       if (mockGetEncoding.mock.calls.length > 0) {
         // If tiktoken was called, use its result
-        expect(mockEncode).toHaveBeenCalledWith('a');
+        expect(mockEncode).toHaveBeenCalledWith('a', 'all');
       } else {
         // If tiktoken failed, should use fallback: Math.ceil(1/4) = 1
         expect(result).toBe(1);

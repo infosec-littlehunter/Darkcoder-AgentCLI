@@ -41,7 +41,6 @@ import {
 import { GitService } from '../services/gitService.js';
 
 // Tools
-import { BinaryAnalysisTool } from '../tools/binary-analysis.js';
 import { CensysTool } from '../tools/censys.js';
 import { EditTool } from '../tools/edit.js';
 import { ExitPlanModeTool } from '../tools/exitPlanMode.js';
@@ -51,11 +50,10 @@ import { LSTool } from '../tools/ls.js';
 import { SecurityIntelTool } from '../tools/security-intel.js';
 import { CISBenchmarkTool } from '../tools/security-rag/index.js';
 import { ApiKeyManagerTool } from '../tools/api-key-manager.js';
-import { BugBountyTool } from '../tools/bug-bounty.js';
 import { URLScanTool } from '../tools/urlscan.js';
 import { CuckooSandboxTool } from '../tools/cuckoo-sandbox.js';
 import { YaraifyTool } from '../tools/yaraify.js';
-import { WebReconMethodologyTool } from '../tools/web-recon-methodology.js';
+import { VulnDbTool } from '../tools/vulnerability-db.js';
 import { ToolValidationTool } from '../tools/tool-validation.js';
 import type { SendSdkMcpMessage } from '../tools/mcp-client.js';
 import { MemoryTool, setGeminiMdFilename } from '../tools/memoryTool.js';
@@ -72,9 +70,7 @@ import { VirusTotalTool } from '../tools/virustotal.js';
 import { HybridAnalysisTool } from '../tools/hybrid-analysis.js';
 import { WaybackMachineTool } from '../tools/wayback-machine.js';
 import { WebSearchTool } from '../tools/web-search/index.js';
-import { WebTechTool } from '../tools/web-tech.js';
 import { WriteFileTool } from '../tools/write-file.js';
-import { ReverseEngineeringTool } from '../tools/reverse-engineering.js';
 
 // Other modules
 import { ideContextStore } from '../ide/ideContext.js';
@@ -1477,11 +1473,7 @@ export class Config {
     registerCoreTool(CensysTool, this);
     registerCoreTool(URLScanTool, this);
     registerCoreTool(SecurityIntelTool, this);
-    registerCoreTool(WebTechTool, this); // Free web technology detection - no API key needed
-
-    // Web Reconnaissance Methodology - Professional pentest workflow guidance
-    // Provides structured approach following OWASP, PTES, and bug bounty standards
-    registerCoreTool(WebReconMethodologyTool, this);
+    registerCoreTool(VulnDbTool, this);
 
     // Tool Validation & Accuracy Guide - False positive/negative analysis
     // Helps LLM understand tool limitations and validate findings
@@ -1507,20 +1499,6 @@ export class Config {
     // API Key Manager for easy integration of security tools
     // Allows managing API keys from within the CLI
     registerCoreTool(ApiKeyManagerTool);
-
-    // Bug Bounty platform integration
-    // Search and explore programs on HackerOne, Bugcrowd, Intigriti, YesWeHack, Immunefi
-    registerCoreTool(BugBountyTool);
-
-    // Binary Analysis Tool - Essential binary file analysis utilities
-    // Integrates file, strings, checksec, readelf, objdump, nm, ldd, xxd for
-    // reverse engineering and vulnerability research
-    registerCoreTool(BinaryAnalysisTool);
-
-    // Reverse Engineering Tool - Advanced RE framework integrations
-    // Integrates radare2, rizin, Ghidra (headless), binwalk, ltrace, strace
-    // for deep binary analysis, decompilation, firmware extraction, and runtime tracing
-    registerCoreTool(ReverseEngineeringTool);
 
     await registry.discoverAllTools();
     console.debug('ToolRegistry created', registry.getAllToolNames());

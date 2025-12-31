@@ -1,10 +1,14 @@
 # CTF Reverse Engineering with darkcoder
 
-> **darkcoder is battle-ready for CTF competitions! This guide shows you how to dominate reverse engineering challenges.**
+> **DarkCoder leverages the Model Context Protocol (MCP) to integrate with industry-standard RE tools like Radare2, Rizin, and Ghidra. This guide shows you how to dominate reverse engineering challenges by delegating complex analysis to isolated MCP environments.**
 
-## ⚠️ Important: Set Realistic Expectations
+## ⚠️ Important: MCP-First Workflow
 
-**Automated tools are powerful assistants, not magic solvers:**
+**DarkCoder has transitioned to an MCP-first model for deep security operations:**
+
+- **Isolation**: Complex tools run in dedicated MCP servers, protecting your local environment.
+- **Flexibility**: Easily swap between different RE engines (r2 vs Ghidra) via MCP.
+- **Verification**: Detection results should be treated as **suggestions to verify**, not absolute truth.
 
 - Detection results should be treated as **suggestions to verify**, not absolute truth
 - False positives/negatives are normal - see [RE Accuracy Guide](./REVERSE_ENGINEERING_ACCURACY_IMPROVEMENTS.md)

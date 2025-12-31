@@ -60,11 +60,8 @@ Qwen Code's built-in tools can be broadly categorized as follows:
 - **[Multi-File Read Tool](./multi-file.md) (`read_many_files`):** A specialized tool for reading content from multiple files or directories, often used by the `@` command.
 - **[Memory Tool](./memory.md) (`save_memory`):** For saving and recalling information across sessions.
 - **[Todo Write Tool](./todo-write.md) (`todo_write`):** For creating and managing structured task lists during coding sessions.
-- **[Binary Patching Tool](./BINARY_PATCHING_GUIDE.md):** For modifying compiled binaries (patching, NOP instructions, string replacement) for research and malware defanging.
-- **[Modern Malware Evasion Detection](./MODERN_MALWARE_EVASION_DETECTION.md):** Comprehensive guide to detecting advanced malware evasion techniques (syscalls, AMSI/ETW bypass, sleep obfuscation, API hashing, module stomping).
-- **[Evasion Quick Reference](./EVASION_QUICK_REFERENCE.md):** Quick reference for malware evasion technique detection and scoring.
-- **[Bug Bounty Tools](./BUG_BOUNTY.md):** Tools for security research and vulnerability analysis.
-- **[Security RAG](./SECURITY_RAG.md):** Retrieval-Augmented Generation for security best practices and compliance.
+- **[Security Intelligence & CVE OSINT](./SECURITY_RAG.md):** Built-in tools for threat intelligence and vulnerability database queries.
+- **[MCP Security Workflow](./mcp-server.md):** The primary mechanism for Reverse Engineering, Vulnerability Hunting, and specialized reconnaissance via external servers.
 
 Additionally, these tools incorporate:
 

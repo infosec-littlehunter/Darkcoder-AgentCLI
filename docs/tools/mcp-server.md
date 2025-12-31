@@ -12,7 +12,10 @@ An MCP server enables the CLI to:
 - **Execute tools:** Call specific tools with defined arguments and receive structured responses.
 - **Access resources:** Read data from specific resources (though the CLI primarily focuses on tool execution).
 
-With an MCP server, you can extend the CLI's capabilities to perform actions beyond its built-in features, such as interacting with databases, APIs, custom scripts, or specialized workflows.
+With an MCP server, you can extend the CLI's capabilities to perform actions beyond its built-in features, such as interacting with databases, APIs, custom scripts, or specialized security workflows. 
+
+> [!IMPORTANT]
+> **Security Operations**: DarkCoder uses MCP as the primary mechanism for deep security tasks like Reverse Engineering (Radare2/Ghidra), automated Vulnerability Hunting, and specialized reconnaissance. This isolation ensures that complex tools run in dedicated environments while the main agent maintains operational control.
 
 ## Core Integration Architecture
 

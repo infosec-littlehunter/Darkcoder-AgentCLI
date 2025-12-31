@@ -34,6 +34,7 @@ describe('LoopDetectionService', () => {
   beforeEach(() => {
     mockConfig = {
       getTelemetryEnabled: () => true,
+      getConciseMode: () => false,
     } as unknown as Config;
     service = new LoopDetectionService(mockConfig);
     vi.clearAllMocks();
