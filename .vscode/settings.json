@@ -14,5 +14,49 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "vitest.disableWorkspaceWarning": true,
-  "remote.autoForwardPortsFallback": 0
+  "remote.autoForwardPortsFallback": 0,
+  "mcpServers": {
+    "browsermcp": {
+      "command": "npx",
+      "args": [
+        "@browsermcp/mcp@latest"
+      ]
+    },
+    "kali_mcp": {
+      "command": "python3",
+      "args": [
+        "/home/littlebird/RepoTools/MCPTools/MCP-Kali-Server/mcp_server.py",
+        "--server",
+        "http://127.0.0.1:5000/"
+      ]
+    },
+    "burpsuite": {
+      "command": "java",
+      "args": [
+        "-jar",
+        "/home/littlebird/RepoTools/MCPTools/BurpCommunity-MCP/mcp-proxy.jar"
+      ]
+    },
+    "mcp-obsidian": {
+      "command": "uvx",
+      "args": [
+        "mcp-obsidian"
+      ],
+      "env": {
+        "OBSIDIAN_API_KEY": "8ced0165932046ba5333d1431f56d46292fa3709b6a6455632bbcf2db9dd92d8",
+        "OBSIDIAN_HOST": "127.0.0.1",
+        "OBSIDIAN_PORT": "27124"
+      }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/home/littlebird"
+      ],
+      "timeout": 60000,
+      "trust": false
+    }
+  }
 }

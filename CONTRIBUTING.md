@@ -1,65 +1,108 @@
 # Contributing to DarkCoder
 
-Thank you for your interest in contributing to DarkCoder! This document provides guidelines and instructions for contributing to the project.
+Thank you for your interest in contributing to DarkCoder! This document provides guidelines and instructions for contributing to the project across all platforms (Windows, macOS, Linux).
 
 ## Code of Conduct
 
 Please note that this project is released with a Contributor Code of Conduct. By participating in this project, you agree to abide by its terms.
 
+## Quick Start for Contributors
+
+**New to the project?** Follow these steps to get started:
+
+1. **Read the Setup Guides**:
+   - [SETUP.md](./SETUP.md) - First-time setup (5 min) - **Includes Windows instructions!**
+   - [BUILD.md](./BUILD.md) - Building troubleshooting
+   - [ARCHITECTURE.md](./ARCHITECTURE.md) - Project structure
+
+2. **Clone and Setup**:
+
+   **On Windows:**
+
+   ```bash
+   git clone https://github.com/infosec-littlehunter/AssistanceAntiCyber-Darkcoder-CLI.git
+   cd AssistanceAntiCyber-Darkcoder-CLI
+   npm install && npm run build
+   ```
+
+   **On macOS/Linux:**
+
+   ```bash
+   git clone https://github.com/infosec-littlehunter/AssistanceAntiCyber-Darkcoder-CLI.git
+   cd AssistanceAntiCyber-Darkcoder-CLI
+   make setup  # or npm install && npm run build
+   ```
+
+3. **Verify Installation**:
+
+   ```bash
+   npm run doctor
+   npm start --help
+   ```
+
+4. **Make Your Changes**:
+
+   **On Windows:**
+
+   ```bash
+   git checkout -b feature/your-feature-name
+   # Make changes and test
+   npm run lint:fix && npm test
+   git commit -m "feat: description"
+   git push origin feature/your-feature-name
+   ```
+
+   **On macOS/Linux:**
+
+   ```bash
+   git checkout -b feature/your-feature-name
+   # Make changes and test
+   make lint-fix && make test
+   git commit -m "feat: description"
+   git push origin feature/your-feature-name
+   ```
+
+5. **Create a Pull Request** with details about your changes
+
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js v20.0.0 or higher
-- npm 10.0.0 or higher
-- Git
-- At least one AI provider API key (OpenAI, Anthropic, etc.)
+- **Node.js** v20.0.0 or higher
+- **npm** v10.0.0 or higher
+- **Git**
+- Optional: At least one AI provider API key (OpenAI, Anthropic, etc.)
 
 ### Development Setup
 
-1. **Fork and Clone**
+**Option A: Using npm (All Platforms, Recommended for Windows)**
 
-   ```bash
-   git clone https://github.com/infosec-littlehunter/AssistanceAntiCyber-Darkcoder-CLI.git
-   cd AssistanceAntiCyber-Darkcoder-CLI/darkcoder
-   ```
+```bash
+# Clone the repository
+git clone https://github.com/infosec-littlehunter/AssistanceAntiCyber-Darkcoder-CLI.git
+cd AssistanceAntiCyber-Darkcoder-CLI
 
-2. **Install Dependencies**
+# Install and build
+npm install && npm run build
 
-   ```bash
-   npm install
-   ```
+# Verify
+npm run doctor
+```
 
-3. **Configure Settings**
+**Option B: Using Makefile (macOS/Linux only)**
 
-   Create `~/.qwen/settings.json` with your preferences:
+```bash
+# Clone
+git clone https://github.com/infosec-littlehunter/AssistanceAntiCyber-Darkcoder-CLI.git
+cd AssistanceAntiCyber-Darkcoder-CLI
 
-   ```bash
-   mkdir -p ~/.qwen
-   cp docs/examples/settings.example.json ~/.qwen/settings.json
-   nano ~/.qwen/settings.json
-   ```
+# One-command setup
+make setup
+```
 
-   See [SETTINGS_GUIDE.md](./docs/SETTINGS_GUIDE.md) for details.
+**Windows Users**: Use Option A above. See [SETUP.md](./SETUP.md#windows-setup) for Windows-specific instructions.
 
-4. **Set Up API Keys**
-
-   ```bash
-   # Add to ~/.bashrc, ~/.zshrc, or equivalent
-   export OPENAI_API_KEY="sk-proj-xxxxx"
-   # OR choose another provider (ANTHROPIC_API_KEY, GOOGLE_API_KEY, etc.)
-   ```
-
-5. **Build the Project**
-
-   ```bash
-   npm run build
-   ```
-
-6. **Start Development**
-   ```bash
-   npm start
-   ```
+For detailed setup instructions with troubleshooting, see [SETUP.md](./SETUP.md).
 
 ## Development Workflow
 
@@ -69,23 +112,54 @@ Please note that this project is released with a Contributor Code of Conduct. By
 git checkout -b feature/your-feature-name
 # or for bug fixes:
 git checkout -b fix/your-bug-fix-name
+# or for documentation:
+git checkout -b docs/update-feature-docs
 ```
 
-### Code Style
+### Available Commands
 
-We use ESLint and Prettier for code style. Before committing:
+**All Platforms (npm):**
 
 ```bash
-# Run linting
+npm run build      # Build
+npm test           # Test
+npm run lint       # Lint
+npm run lint:fix   # Fix linting issues
+npm run format     # Format code
+npm start          # Run CLI
+npm run doctor     # Health check
+```
+
+**macOS/Linux (make):**
+
+```bash
+make build         # Build
+make test          # Test
+make lint          # Lint
+make lint-fix      # Fix linting issues
+make format        # Format code
+make start         # Run CLI
+make doctor        # Health check
+```
+
+See [QUICKREF.md](./QUICKREF.md) for all available commands.
+
+### Code Quality
+
+#### All Platforms:
+
+```bash
+# Check code style
 npm run lint
+
+# Fix code style automatically
+npm run lint:fix
 
 # Format code
 npm run format
-
-# Or let pre-commit hooks handle it
-git add .
-git commit -m "your message"
 ```
+
+Pre-commit hooks will automatically run formatting and linting when you commit.
 
 ### Testing
 
@@ -98,6 +172,9 @@ npm test -- --watch
 
 # Run specific test file
 npm test -- path/to/test.ts
+
+# Run with coverage
+npm test -- --coverage
 ```
 
 ### Writing Tests
@@ -105,6 +182,7 @@ npm test -- path/to/test.ts
 - Place test files alongside source files with `.test.ts` suffix
 - Use Vitest for unit tests
 - Aim for good coverage of critical functionality
+- For security tools, ensure memory safety tests are included
 
 ## Commit Guidelines
 
@@ -172,16 +250,22 @@ docs: Update installation instructions
 
 ```
 darkcoder/
-├── packages/
-│   ├── cli/                 # Main CLI package
-│   ├── core/               # Core functionality
-│   ├── sdk-typescript/     # TypeScript SDK
-│   ├── test-utils/         # Testing utilities
+├── packages/              # Monorepo packages
+│   ├── cli/              # Main CLI application
+│   ├── core/             # Core functionality and tools
+│   ├── sdk-typescript/   # TypeScript SDK for programmatic use
+│   ├── test-utils/       # Shared testing utilities
 │   └── vscode-ide-companion/  # VS Code extension
-├── docs/                   # Documentation
-├── scripts/                # Build and utility scripts
-└── integration-tests/      # Integration tests
+├── docs/                 # Comprehensive documentation
+├── scripts/              # Build and utility scripts
+├── integration-tests/    # End-to-end integration tests
+├── BUILD.md              # Build and compilation guide
+├── SETUP.md              # First-time setup guide
+├── ARCHITECTURE.md       # Project structure and design
+└── Makefile              # Quick command reference
 ```
+
+**For detailed project structure**, see [ARCHITECTURE.md](./ARCHITECTURE.md)
 
 ## Adding New Security Tools
 

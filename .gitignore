@@ -1,112 +1,174 @@
-# API keys and secrets
+# ============================================================================
+# SECURITY: Secrets & Credentials (NEVER commit these!)
+# ============================================================================
 .env
 .env~
 .env.local
 .env.*.local
+.env*.local
 *.key
 *.pem
+*.p12
+*.pfx
 *credentials*.json
 *secrets*.json
 *apikey*
+*api_key*
+*token*
+.aws/
+.gcp/
+.azure/
 !.env.example
 
-# gemini-cli settings
-# We want to keep the .gemini in the root of the repo and ignore any .gemini
-# in subdirectories. In our root .gemini we want to allow for version control
-# for subcommands.
-**/.gemini/
-!/.gemini/
+# ============================================================================
+# PROJECT-SPECIFIC CONFIG
+# ============================================================================
+# DarkCoder configuration
 .gemini/*
 !.gemini/config.yaml
 !.gemini/commands/
+**/.gemini/
+!/.gemini/
 
-# Note: .gemini-clipboard/ is NOT in gitignore so Gemini can access pasted images
+# User-specific configurations
+.qwen/
+.darkcoder/
 
-# Dependency directory
-node_modules
-bower_components
+# ============================================================================
+# DEPENDENCIES
+# ============================================================================
+node_modules/
+bower_components/
 package-lock.json
+pnpm-lock.yaml
+yarn.lock
+bun.lockb
 
-# Editors
-.idea
-*.iml
-.cursor
-
-# OS metadata
-.DS_Store
-Thumbs.db
-
-# TypeScript build info files
+# ============================================================================
+# BUILD & COMPILATION OUTPUT
+# ============================================================================
+dist/
+build/
+bundle/
 *.tsbuildinfo
+esbuild.config.js.map
 
-# Ignore built ts files
-dist
-
-# Docker folder to help skip auth refreshes
-.docker
-
-bundle
-
-# Test report files
-junit.xml
-packages/*/coverage/
+# Compiled TypeScript
+**/*.js
+**/*.js.map
+**/*.d.ts
+!esbuild.config.js
+!vitest.config.ts
+!scripts/**/*.js
+!scripts/detect-runtime.js
 
 # Generated files
 packages/cli/src/generated/
 packages/core/src/generated/
-.integration-tests/
-packages/vscode-ide-companion/*.vsix
-
-# Compiled artifacts from TypeScript (keep source clean)
-# If your workflow publishes transpiled sources, remove or adjust these.
-packages/**/src/**/*.js
-packages/**/src/**/*.js.map
-packages/**/src/**/*.d.ts
-
-# Integration tests compiled files
+packages/*/src/**/*.js
+packages/*/src/**/*.js.map
+packages/*/src/**/*.d.ts
 integration-tests/**/*.js
 integration-tests/**/*.js.map
 integration-tests/**/*.d.ts
-!integration-tests/vitest.config.ts
-!integration-tests/globalSetup.ts
-
-# Scripts compiled files  
 scripts/**/*.js.map
 scripts/**/*.d.ts
-
-# Root config compiled files
 vitest.config.js
 vitest.config.js.map
 vitest.config.d.ts
-
-# Package root compiled files (not in src/)
 packages/*/index.js
 packages/*/index.js.map
 packages/*/index.d.ts
 packages/*/test-setup.js
 packages/*/test-setup.js.map
 packages/*/test-setup.d.ts
-
-# SDK test compiled files
 packages/sdk-typescript/test/**/*.js
 packages/sdk-typescript/test/**/*.js.map
 packages/sdk-typescript/test/**/*.d.ts
-
-# Docs compiled files (TypeScript meta files)
 docs/**/*.js
 docs/**/*.js.map
 docs/**/*.d.ts
 
-# Qwen Code Configs
-.qwen/
+# ============================================================================
+# EDITORS & IDEs
+# ============================================================================
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.iml
+*.swp
+*.swo
+*~
+.cursor
+.DS_Store
+Thumbs.db
+.env.local.php
+
+# ============================================================================
+# TESTING & COVERAGE
+# ============================================================================
+coverage/
+.coverage
+junit.xml
+test-results/
+*.lcov
+.nyc_output/
+*.coverage
+packages/*/coverage/
+
+# ============================================================================
+# RUNTIME & LOGS
+# ============================================================================
 logs/
-# GHA credentials
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.docker/
+.integration-tests/
+
+# ============================================================================
+# EXTENSIONS & PLUGINS
+# ============================================================================
+packages/vscode-ide-companion/*.vsix
+.vscode-test/
+
+# ============================================================================
+# AUTO-GENERATED FILES
+# ============================================================================
+.fake
+patch_output.log
+.github/instructions/snyk_rules.instructions.md
 gha-creds-*.json
 
-# Log files
-patch_output.log
+# ============================================================================
+# TEMPORARY FILES
+# ============================================================================
+*.tmp
+*.temp
+.cache/
+tmp/
+temp/
 
-# Snyk Security Extension - AI Rules (auto-generated)
-.github/instructions/snyk_rules.instructions.md
+# ============================================================================
+# PLATFORM-SPECIFIC
+# ============================================================================
+# Windows
+desktop.ini
+$RECYCLE.BIN/
+.windows
 
-.fake
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+.directory
+
+# Docker
+.docker/
+docker-compose.override.yml

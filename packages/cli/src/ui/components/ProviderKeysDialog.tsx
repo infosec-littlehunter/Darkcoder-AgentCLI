@@ -5,11 +5,12 @@
  */
 
 import type React from 'react';
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useContext } from 'react';
 import { Box, Text } from 'ink';
 import { Colors } from '../colors.js';
 import { useKeypress } from '../hooks/useKeypress.js';
 import { useSettings } from '../contexts/SettingsContext.js';
+import { ConfigContext } from '../contexts/ConfigContext.js';
 import { SettingScope } from '../../config/settings.js';
 import { AI_PROVIDERS, type AIProvider } from '../models/aiProviders.js';
 import { AuthType } from '@darkcoder/darkcoder-core';
@@ -38,6 +39,7 @@ interface ProviderKeyConfig {
 export function ProviderKeysDialog({
   onClose,
 }: ProviderKeysDialogProps): React.JSX.Element {
+  const config = useContext(ConfigContext);
   const settings = useSettings();
   const [dialogState, setDialogState] = useState<DialogState>('list');
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -110,11 +112,11 @@ export function ProviderKeysDialog({
 
   // Save provider config
   const saveProviderConfig = useCallback(
-    (providerId: string, config: Partial<ProviderKeyConfig>) => {
+    async (providerId: string, providerConfig: Partial<ProviderKeyConfig>) => {
       const currentProviders = { ...storedProviders };
       currentProviders[providerId] = {
         ...currentProviders[providerId],
-        ...config,
+        ...providerConfig,
       } as ProviderKeyConfig;
 
       settings.setValue(
@@ -123,14 +125,33 @@ export function ProviderKeysDialog({
         currentProviders,
       );
 
-      // Also set selectedType to USE_OPENAI so the auth dialog doesn't prompt again
+      // Set the selected model name
+      const selectedModel =
+        providerConfig.model || currentProviders[providerId]?.model;
+      if (selectedModel) {
+        settings.setValue(SettingScope.User, 'model.name', selectedModel);
+      }
+
+      // Set selectedType to USE_OPENAI so the auth dialog doesn't prompt again
       settings.setValue(
         SettingScope.User,
         'security.auth.selectedType',
         AuthType.USE_OPENAI,
       );
+
+      // Update runtime credentials if config is available
+      if (config) {
+        config.updateCredentials({
+          baseUrl: providerConfig.baseUrl || '',
+          model: selectedModel || '',
+          ...(providerConfig.apiKey && { apiKey: providerConfig.apiKey }),
+        });
+
+        // Refresh auth to recreate the content generator with new provider settings
+        await config.refreshAuth(AuthType.USE_OPENAI);
+      }
     },
-    [settings, storedProviders],
+    [settings, storedProviders, config],
   );
 
   // Handle list navigation
@@ -206,17 +227,22 @@ export function ProviderKeysDialog({
         } else {
           // Save and exit
           if (apiKeyInput.trim()) {
+            // Call async save function
             saveProviderConfig(editingProvider.id, {
               apiKey: apiKeyInput.trim(),
               baseUrl: editingProvider.baseUrl,
               model: modelInput.trim() || editingProvider.models[0]?.id,
+            }).then(() => {
+              setMessage({ text: t('API key saved!'), type: 'success' });
+              setTimeout(() => {
+                setDialogState('list');
+                setEditingProvider(null);
+                setMessage(null);
+              }, 500);
+            }).catch((err) => {
+              console.error('Error saving provider config:', err);
+              setMessage({ text: t('Failed to save API key'), type: 'error' });
             });
-            setMessage({ text: t('API key saved!'), type: 'success' });
-            setTimeout(() => {
-              setDialogState('list');
-              setEditingProvider(null);
-              setMessage(null);
-            }, 500);
           } else {
             setMessage({ text: t('API key is required'), type: 'error' });
           }

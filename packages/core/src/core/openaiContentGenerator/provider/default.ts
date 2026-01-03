@@ -7,9 +7,7 @@ import type { OpenAICompatibleProvider } from './types.js';
 /**
  * Default provider for standard OpenAI-compatible APIs
  */
-export class DefaultOpenAICompatibleProvider
-  implements OpenAICompatibleProvider
-{
+export class DefaultOpenAICompatibleProvider implements OpenAICompatibleProvider {
   protected contentGeneratorConfig: ContentGeneratorConfig;
   protected cliConfig: Config;
 
@@ -51,8 +49,9 @@ export class DefaultOpenAICompatibleProvider
     _userPromptId: string,
   ): OpenAI.Chat.ChatCompletionCreateParams {
     // Default provider doesn't need special enhancements, just pass through all parameters
+    // Preserve any system instruction metadata for provider-aware clients
     return {
-      ...request, // Preserve all original parameters including sampling params
+      ...request,
     };
   }
 }

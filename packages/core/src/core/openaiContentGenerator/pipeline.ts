@@ -13,6 +13,7 @@ import type { Config } from '../../config/config.js';
 import type { ContentGeneratorConfig } from '../contentGenerator.js';
 import type { OpenAICompatibleProvider } from './provider/index.js';
 import { OpenAIContentConverter } from './converter.js';
+import { SystemInstructionHandler } from './systemInstructionHandler.js';
 import type { TelemetryService, RequestContext } from './telemetryService.js';
 import type { ErrorHandler } from './errorHandler.js';
 
@@ -251,14 +252,29 @@ export class ContentGenerationPipeline {
     userPromptId: string,
     streaming: boolean = false,
   ): Promise<OpenAI.Chat.ChatCompletionCreateParams> {
-    const messages = this.converter.convertGeminiRequestToOpenAI(request);
+    let messages = this.converter.convertGeminiRequestToOpenAI(request);
+
+    // Handle system instruction natively for provider-aware formats
+    const { messages: filteredMessages, systemInstruction } =
+      SystemInstructionHandler.prepareRequestWithSystemInstruction(
+        request,
+        messages,
+        this.contentGeneratorConfig.model,
+        this.contentGeneratorConfig.baseUrl,
+      );
 
     // Apply provider-specific enhancements
     const baseRequest: OpenAI.Chat.ChatCompletionCreateParams = {
       model: this.contentGeneratorConfig.model,
-      messages,
+      messages: filteredMessages,
       ...this.buildSamplingParameters(request),
     };
+
+    // Attach extracted system instruction for provider to handle natively
+    // This allows providers like Anthropic and Gemini to use their native system instruction APIs
+    if (systemInstruction) {
+      (baseRequest as any)._systemInstruction = systemInstruction;
+    }
 
     // Add streaming options if present
     if (streaming) {
@@ -275,7 +291,7 @@ export class ContentGenerationPipeline {
       );
     }
 
-    // Let provider enhance the request (e.g., add metadata, cache control)
+    // Let provider enhance the request (e.g., add metadata, cache control, native system instruction)
     return this.config.provider.buildRequest(baseRequest, userPromptId);
   }
 

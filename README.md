@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/version-0.7.0-blue.svg" alt="version">
   <img src="https://img.shields.io/badge/license-Apache%202.0-green.svg" alt="license">
   <img src="https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen.svg" alt="node version">
-  <img src="https://img.shields.io/badge/platform-linux%20%7C%20macOS%20%7C%20WSL-blue.svg" alt="platform">
+  <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue.svg" alt="platform">
   <img src="https://img.shields.io/badge/AI_Models-29+-purple.svg" alt="AI models">
   <img src="https://img.shields.io/badge/Security_Tools-58+-red.svg" alt="Security tools">
   <img src="https://img.shields.io/badge/CVE_Intelligence-Live-red.svg" alt="CVE intelligence">
@@ -199,6 +199,8 @@
 ---
 
 ## 🚀 Quick Start
+
+> **Windows Users**: DarkCoder is fully cross-platform compatible! See [WINDOWS_COMPATIBILITY.md](./WINDOWS_COMPATIBILITY.md) for Windows-specific setup and guidance. All `npm` commands work on Windows, and the shell scripts have been converted to JavaScript equivalents.
 
 ### Option 1: Docker (Fastest - Recommended)
 

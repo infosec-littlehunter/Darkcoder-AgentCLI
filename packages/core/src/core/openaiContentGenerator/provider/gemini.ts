@@ -103,8 +103,18 @@ export class GeminiOpenAICompatibleProvider extends DefaultOpenAICompatibleProvi
     const baseRequest = super.buildRequest(request, userPromptId);
 
     // Gemini-specific handling
-    // Gemini's OpenAI-compatible endpoint supports most standard parameters
-    // but may have different behavior for some features
+    // Extract native system instruction if available (passed via _systemInstruction)
+    const systemInstruction = (request as any)._systemInstruction;
+
+    if (systemInstruction) {
+      // For Gemini, preserve system instruction for native handling
+      // This is a workaround for OpenAI-compatible endpoint
+      (baseRequest as any)._nativeSystemInstruction = systemInstruction;
+      // Remove from messages to prevent duplication
+      baseRequest.messages = baseRequest.messages.filter(
+        (msg) => msg.role !== 'system',
+      );
+    }
 
     // Remove unsupported parameters for Gemini
     const geminiRequest = { ...baseRequest };

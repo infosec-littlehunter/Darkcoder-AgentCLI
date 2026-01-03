@@ -95,8 +95,19 @@ export class AnthropicOpenAICompatibleProvider extends DefaultOpenAICompatiblePr
     const baseRequest = super.buildRequest(request, userPromptId);
 
     // Claude-specific optimizations
-    // Claude prefers explicit system messages and handles them well
-    // No special transformations needed for OpenAI-compatible format
+    // Extract native system instruction if available (passed via _systemInstruction)
+    const systemInstruction = (request as any)._systemInstruction;
+
+    if (systemInstruction) {
+      // For Anthropic Claude, add system instruction as a header
+      // This is a workaround for OpenAI-compatible endpoint
+      // The native system instruction handling is done at client level in ContentGenerator
+      (baseRequest as any)._nativeSystemInstruction = systemInstruction;
+      // Remove from messages to prevent duplication
+      baseRequest.messages = baseRequest.messages.filter(
+        (msg) => msg.role !== 'system',
+      );
+    }
 
     return baseRequest;
   }

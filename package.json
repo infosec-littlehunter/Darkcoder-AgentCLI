@@ -92,7 +92,10 @@
     "clean": "node scripts/clean.js",
     "pre-commit": "node scripts/pre-commit.js",
     "doctor": "node scripts/doctor.js",
-    "setup:check": "node scripts/doctor.js"
+    "setup:check": "node scripts/doctor.js",
+    "setup:settings": "node scripts/setup-settings.js",
+    "setup:memory": "node scripts/setup-memory.js",
+    "setup:alias": "node scripts/create-alias.js"
   },
   "overrides": {
     "wrap-ansi": "9.0.2",
